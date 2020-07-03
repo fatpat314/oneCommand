@@ -11,25 +11,28 @@ import (
 	"log"
 	// "os"
 	"os/exec"
-	"strings"
+	// "strings"
 	// "time"
 )
 
 func ExampleCmd_Run() {
 
     cmd := exec.Command("git", "add", ".")
-	cmd.Stdin = strings.NewReader("some input")
 	var out bytes.Buffer
 	cmd.Stdout = &out
 
     cmd2 := exec.Command("git", "commit", "-m", "automated")
-
     var out2 bytes.Buffer
     cmd2.Stdout = &out2
+
+    cmd3 := exec.Command("git", "commit", "-m", "automated")
+    var out3 bytes.Buffer
+    cmd3.Stdout = &out3
 
 
 	err := cmd.Run()
     err2 := cmd2.Run()
+    err3 := cmd2.Run()
 
 
 	if err != nil {
@@ -39,8 +42,13 @@ func ExampleCmd_Run() {
     if err2 != nil {
         log.Fatal(err2)
     }
+
+    if err3 != nil {
+        log.Fatal(err3)
+    }
 	fmt.Printf(out.String())
     fmt.Printf(out2.String())
+    fmt.Printf(out3.String())
 }
 
 func main(){
