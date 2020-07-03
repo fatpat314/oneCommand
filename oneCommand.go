@@ -32,7 +32,7 @@ func ExampleCmd_Run() {
 
 	err := cmd.Run()
     err2 := cmd2.Run()
-    err3 := cmd2.Run()
+    err3 := cmd3.Run()
 
 
 	if err != nil {
@@ -46,6 +46,7 @@ func ExampleCmd_Run() {
     if err3 != nil {
         log.Fatal(err3)
     }
+    
 	fmt.Printf(out.String())
     fmt.Printf(out2.String())
     fmt.Printf(out3.String())
