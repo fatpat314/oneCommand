@@ -3,7 +3,7 @@ cat text3.txt
 say does it work?
 say this is working
 git add .
-sleep 5
+echo finished
 git commit -m "this is working automated"
-sleep 5
+echo finished
 git push origin master

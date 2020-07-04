@@ -95,19 +95,19 @@ func ExampleCmd_Run() {
             com1 = strings.TrimSpace(com1)
             com2 = strings.TrimSpace(com2)
             cmd = exec.Command(string(com1), string(com2))
-            // var out bytes.Buffer
-            // cmd.Stdout = &out
-            // err := cmd.Run()
-            // if err != nil {
-        	// 	log.Fatal(err)
-        	// }
-            //
-            // fmt.Printf(out.String())
-            //
-            //
-            //
-            // fmt.Print("\n")
-            //
+            var out bytes.Buffer
+            cmd.Stdout = &out
+            err := cmd.Run()
+            if err != nil {
+        		log.Fatal(err)
+        	}
+
+            fmt.Printf(out.String())
+
+
+
+            fmt.Print("\n")
+
             // n += 1
 
         case len(list) == 3:
@@ -119,18 +119,18 @@ func ExampleCmd_Run() {
             com2 = strings.TrimSpace(com2)
             com3 = strings.TrimSpace(com3)
             cmd = exec.Command(string(com1), string(com2), string(com3))
-            // var out bytes.Buffer
-            // cmd.Stdout = &out
-            // err := cmd.Run()
-            // if err != nil {
-        	// 	log.Fatal(err)
-        	// }
-            //
-            // fmt.Printf(out.String())
-            //
-            //
-            //
-            // fmt.Print("\n")
+            var out bytes.Buffer
+            cmd.Stdout = &out
+            err := cmd.Run()
+            if err != nil {
+        		log.Fatal(err)
+        	}
+
+            fmt.Printf(out.String())
+
+
+
+            fmt.Print("\n")
 
             // n += 1
 
@@ -145,16 +145,16 @@ func ExampleCmd_Run() {
             com3 = strings.TrimSpace(com3)
             com4 = strings.TrimSpace(com4)
             cmd = exec.Command(string(com1), string(com2), string(com3), string(com4))
-            // var out bytes.Buffer
-            // cmd.Stdout = &out
-            // err := cmd.Run()
-            // if err != nil {
-        	// 	log.Fatal(err)
-        	// }
-            //
-            // fmt.Printf(out.String())
-            // fmt.Print("\n")
-            //
+            var out bytes.Buffer
+            cmd.Stdout = &out
+            err := cmd.Run()
+            if err != nil {
+        		log.Fatal(err)
+        	}
+
+            fmt.Printf(out.String())
+            fmt.Print("\n")
+
             // n += 1
 
         }
@@ -169,20 +169,20 @@ func ExampleCmd_Run() {
         // }
 
 
-    	var out bytes.Buffer
-    	cmd.Stdout = &out
-
-        err := cmd.Run()
-        if err != nil {
-    		log.Fatal(err)
-    	}
-
-        fmt.Printf(out.String())
-
-
-
-        fmt.Print("\n")
-
+    	// var out bytes.Buffer
+    	// cmd.Stdout = &out
+        //
+        // err := cmd.Run()
+        // if err != nil {
+    	// 	log.Fatal(err)
+    	// }
+        //
+        // fmt.Printf(out.String())
+        //
+        //
+        //
+        // fmt.Print("\n")
+        //
         n += 1
     }
 
