@@ -1,1 +1,2 @@
-Bazinga!
+git commit -m "automated"
+git push origin master

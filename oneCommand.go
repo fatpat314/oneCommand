@@ -7,53 +7,207 @@ import (
     // "bufio"
 	"fmt"
 	// "io"
-	// "io/ioutil"
+	"io/ioutil"
 	"log"
 	// "os"
 	"os/exec"
-	// "strings"
+	"strings"
 	// "time"
 )
 
+func readFile(){
+    fileContents, err := ioutil.ReadFile("text2.txt")
+    if err != nil {
+        panic(err)
+    }
+    fmt.Print(string(fileContents))
+    return
+}
+
 func ExampleCmd_Run() {
 
-    cmd := exec.Command("git", "add", ".")
-	var out bytes.Buffer
-	cmd.Stdout = &out
+    // file, err2 := os.Open("text2.txt")
+    // if err2 != nil {
+    //     panic(err2)
+    // }
+    // defer file.Close()
+    // fmt.Print(string(file))
+    //
+    // s := bufio.NewScanner(file)
+    // for s.Scan(){
+    //     com := s.Text()
+    // }
 
-    cmd2 := exec.Command("git", "commit", "-m", "automated")
-    var out2 bytes.Buffer
-    cmd2.Stdout = &out2
-
-    cmd3 := exec.Command("git", "push", "origin", "master")
-    var out3 bytes.Buffer
-    cmd3.Stdout = &out3
-
-
-	err := cmd.Run()
-    err2 := cmd2.Run()
-    err3 := cmd3.Run()
-
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-    if err2 != nil {
-        log.Fatal(err2)
-    }
-
+    fileContents, err3 := ioutil.ReadFile("text2.txt")
     if err3 != nil {
-        log.Fatal(err3)
+        panic(err3)
     }
-    
-	fmt.Printf(out.String())
-    fmt.Printf(out2.String())
-    fmt.Printf(out3.String())
+    fmt.Print(string(fileContents))
+
+
+
+
+    // reader := bufio.NewReader(os.Stdin)
+    // fmt.Print("Enter your city: ")
+    // com, _ := reader.ReadString('\n')
+    // fmt.Print("You live in " + com)
+
+
+    command := string(fileContents)
+    com1 := " "
+    com2 := " "
+    com3 := " "
+    com4 := " "
+
+    // for each line in text
+    commandMap := make(map[int]string)
+    commandKey := strings.Split(command, "\n")
+    // commandValue := " "
+    keyLength := len(commandKey)
+    // value := 0
+
+    key := 0
+    for key < keyLength - 1 {
+        commandMap[key] = commandKey[key]
+        // s := commandKey[value]
+        // commandValueList := strings.Split(s, ",")
+        // value := commandValueList[key]
+        // fmt.Print("VALUE: ", value, "\n")
+        // key += 1
+        // value += 1
+        // s := string(commandKey[key])
+        // commandValue = strings.Split(s, ",")
+        key += 1
+
+    }
+
+    n := 0
+    // m := n + 1
+    valueList := len(commandMap)
+    for n < valueList {
+        values := string(commandMap[n])
+        fmt.Print("VALUES: ", values, "\n")
+        list := strings.Split(values, " ")
+        fmt.Print("LIST: ", list, "\n")
+        fmt.Print("\n")
+        com1 = list[0]
+        com2 = list[1]
+        com3 = list[2]
+        com4 = list[3]
+
+        com1 = strings.TrimSpace(com1)
+        com2 = strings.TrimSpace(com2)
+        com3 = strings.TrimSpace(com3)
+        com4 = strings.TrimSpace(com4)
+
+        cmd := exec.Command(string(com1), string(com2), string(com3), string(com4))
+    	var out bytes.Buffer
+    	cmd.Stdout = &out
+
+        err := cmd.Run()
+        if err != nil {
+    		log.Fatal(err)
+    	}
+
+        fmt.Printf(out.String())
+
+
+
+        fmt.Print("\n")
+
+        n += 1
+    }
+
+
+
+    // commandValue := strings.Split
+    // value := 0
+
+
+    // commandValue := strings.Split(commandKey, ",")
+    // fmt.Print("Value ", commandValue)
+
+
+    // commandMap := make(map[int]string)
+    // commandMap[commandKey[0]] = "check"
+    // fmt.Print(s)
+
+    // keyLength := len(commandKey)
+    // key := 0
+    // valueLength := len(commandValue)
+    // value := 0
+    // for key < keyLength {
+    //     // commandMap[key] = commandValue[value]
+    //     for value < valueLength{
+    //         commandValue := strings.Split(command, ",")
+    //         commandMap[key] = commandValue[value]
+    //         value += 1
+    //     }
+    //
+    //     // commandMap[key] = commandValue[n]
+    //     // fmt.Print("MAP: ", commandMap, '\n')
+    //
+    //     // com1 = commandMap[0]
+    //     // com2 = commandMap[1]
+    //
+    //     // command = commandKey[n]
+    //     // if command == commandKey[0]{
+    //     //     com1 = command
+    //     // }
+    //     // if command == commandKey[1]{
+    //     //     com2 = command
+    //     // }
+    //     key += 1
+    // // }
+    // fmt.Print("MAP: ", commandMap)
+    //
+    // fmt.Println("END: ", com1, com2)
+    // // com1 = commandMap[0]
+    // // com1 = "cat"
+    // com1 = strings.TrimSpace(com1)
+    // // com2 = commandMap[0:1]
+    // // com2 = "text.txt"
+    // com2 = strings.TrimSpace(com2)
+    //
+    //
+    //
+    // cmd := exec.Command(string(com1), string(com2))
+	// var out bytes.Buffer
+	// cmd.Stdout = &out
+    //
+    // // cmd2 := exec.Command("git", "commit", "-m", "automated")
+    // // var out2 bytes.Buffer
+    // // cmd2.Stdout = &out2
+    // //
+    // // cmd3 := exec.Command("git", "push", "origin", "master")
+    // // var out3 bytes.Buffer
+    // // cmd3.Stdout = &out3
+    //
+    //
+	// err := cmd.Run()
+    // // err2 := cmd2.Run()
+    // // err3 := cmd3.Run()
+    //
+    //
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+    //
+    // // if err2 != nil {
+    // //     log.Fatal(err2)
+    // // }
+    // //
+    // // if err3 != nil {
+    // //     log.Fatal(err3)
+    // // }
+    //
+	// fmt.Printf(out.String())
+    // fmt.Printf(out2.String())
+    // fmt.Printf(out3.String())
 }
 
 func main(){
-
+    // readFile()
     ExampleCmd_Run()
 
     // reader := bufio.NewReader(os.Stdin)
