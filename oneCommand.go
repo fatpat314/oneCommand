@@ -54,10 +54,13 @@ func ExampleCmd_Run() {
 
 
     command := string(fileContents)
+
     com1 := " "
     com2 := " "
     com3 := " "
     com4 := " "
+    cmd := exec.Command(string(com1), string(com2))
+
 
     // for each line in text
     commandMap := make(map[int]string)
@@ -67,16 +70,8 @@ func ExampleCmd_Run() {
     // value := 0
 
     key := 0
-    for key < keyLength - 1 {
+    for key < keyLength {
         commandMap[key] = commandKey[key]
-        // s := commandKey[value]
-        // commandValueList := strings.Split(s, ",")
-        // value := commandValueList[key]
-        // fmt.Print("VALUE: ", value, "\n")
-        // key += 1
-        // value += 1
-        // s := string(commandKey[key])
-        // commandValue = strings.Split(s, ",")
         key += 1
 
     }
@@ -84,23 +79,96 @@ func ExampleCmd_Run() {
     n := 0
     // m := n + 1
     valueList := len(commandMap)
+    fmt.Print("valueList: ", valueList)
     for n < valueList {
         values := string(commandMap[n])
         fmt.Print("VALUES: ", values, "\n")
         list := strings.Split(values, " ")
         fmt.Print("LIST: ", list, "\n")
         fmt.Print("\n")
-        com1 = list[0]
-        com2 = list[1]
-        com3 = list[2]
-        com4 = list[3]
 
-        com1 = strings.TrimSpace(com1)
-        com2 = strings.TrimSpace(com2)
-        com3 = strings.TrimSpace(com3)
-        com4 = strings.TrimSpace(com4)
+        switch {
+        case len(list) == 2:
+            fmt.Print("2", "\n")
+            com1 = list[0]
+            com2 = list[1]
+            com1 = strings.TrimSpace(com1)
+            com2 = strings.TrimSpace(com2)
+            cmd = exec.Command(string(com1), string(com2))
+            // var out bytes.Buffer
+            // cmd.Stdout = &out
+            // err := cmd.Run()
+            // if err != nil {
+        	// 	log.Fatal(err)
+        	// }
+            //
+            // fmt.Printf(out.String())
+            //
+            //
+            //
+            // fmt.Print("\n")
+            //
+            // n += 1
 
-        cmd := exec.Command(string(com1), string(com2), string(com3), string(com4))
+        case len(list) == 3:
+            fmt.Print("3", "\n")
+            com1 = list[0]
+            com2 = list[1]
+            com3 = list[2]
+            com1 = strings.TrimSpace(com1)
+            com2 = strings.TrimSpace(com2)
+            com3 = strings.TrimSpace(com3)
+            cmd = exec.Command(string(com1), string(com2), string(com3))
+            // var out bytes.Buffer
+            // cmd.Stdout = &out
+            // err := cmd.Run()
+            // if err != nil {
+        	// 	log.Fatal(err)
+        	// }
+            //
+            // fmt.Printf(out.String())
+            //
+            //
+            //
+            // fmt.Print("\n")
+
+            // n += 1
+
+        case len(list) == 4:
+            fmt.Print("4", "\n")
+            com1 = list[0]
+            com2 = list[1]
+            com3 = list[2]
+            com4 = list[3]
+            com1 = strings.TrimSpace(com1)
+            com2 = strings.TrimSpace(com2)
+            com3 = strings.TrimSpace(com3)
+            com4 = strings.TrimSpace(com4)
+            cmd = exec.Command(string(com1), string(com2), string(com3), string(com4))
+            // var out bytes.Buffer
+            // cmd.Stdout = &out
+            // err := cmd.Run()
+            // if err != nil {
+        	// 	log.Fatal(err)
+        	// }
+            //
+            // fmt.Printf(out.String())
+            // fmt.Print("\n")
+            //
+            // n += 1
+
+        }
+
+        // if len(list) == 2{
+        //     print("CEHCK", "\n")
+        //     com1 = list[0]
+        //     com2 = list[1]
+        //     com1 = strings.TrimSpace(com1)
+        //     com2 = strings.TrimSpace(com2)
+        //     cmd = exec.Command(string(com1), string(com2))
+        // }
+
+
     	var out bytes.Buffer
     	cmd.Stdout = &out
 

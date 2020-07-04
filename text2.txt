@@ -1,2 +1,9 @@
-git commit -m "automated"
+cat text.txt
+cat text3.txt
+say does it work?
+say this is working
+git add .
+sleep 5
+git commit -m "this is working automated"
+sleep 5
 git push origin master
