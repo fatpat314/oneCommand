@@ -62,6 +62,23 @@ func ExampleCmd_Run() {
         fmt.Print("\n")
 
         switch {
+
+        case len(list) == 1:
+            fmt.Print("1", "\n")
+            com1 = list[0]
+            com1 = strings.TrimSpace(com1)
+            cmd = exec.Command(string(com1))
+            var out bytes.Buffer
+            cmd.Stdout = &out
+            err := cmd.Run()
+            test := cmd.Wait()
+            if err != nil {
+                log.Fatal(err)
+                log.Fatal(test)
+            }
+            fmt.Printf(out.String())
+            fmt.Print("\n")
+
         case len(list) == 2:
             fmt.Print("2", "\n")
             com1 = list[0]
@@ -139,9 +156,11 @@ func ExampleCmd_Run() {
             var out bytes.Buffer
             cmd.Stdout = &out
             err := cmd.Run()
+            test := cmd.Wait()
             if err != nil {
-                log.Fatal(err)
-            }
+        		log.Fatal(err)
+                log.Fatal(test)
+        	}
 
             fmt.Printf(out.String())
             fmt.Print("\n")
@@ -164,9 +183,11 @@ func ExampleCmd_Run() {
             var out bytes.Buffer
             cmd.Stdout = &out
             err := cmd.Run()
+            test := cmd.Wait()
             if err != nil {
-                log.Fatal(err)
-            }
+        		log.Fatal(err)
+                log.Fatal(test)
+        	}
 
             fmt.Printf(out.String())
             fmt.Print("\n")
