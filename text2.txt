@@ -1,9 +1,3 @@
-cat text.txt
-cat text3.txt
-say does it work?
-say this is working
 git add .
-echo finished
-git commit -m "this is working automated"
-echo finished
+git commit -m "test"
 git push origin master

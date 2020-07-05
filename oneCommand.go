@@ -25,59 +25,33 @@ func readFile(){
 }
 
 func ExampleCmd_Run() {
-
-    // file, err2 := os.Open("text2.txt")
-    // if err2 != nil {
-    //     panic(err2)
-    // }
-    // defer file.Close()
-    // fmt.Print(string(file))
-    //
-    // s := bufio.NewScanner(file)
-    // for s.Scan(){
-    //     com := s.Text()
-    // }
-
     fileContents, err3 := ioutil.ReadFile("text2.txt")
     if err3 != nil {
         panic(err3)
     }
     fmt.Print(string(fileContents))
-
-
-
-
-    // reader := bufio.NewReader(os.Stdin)
-    // fmt.Print("Enter your city: ")
-    // com, _ := reader.ReadString('\n')
-    // fmt.Print("You live in " + com)
-
-
     command := string(fileContents)
 
     com1 := " "
     com2 := " "
     com3 := " "
     com4 := " "
+    com5 := " "
+    com6 := " "
     cmd := exec.Command(string(com1), string(com2))
-
 
     // for each line in text
     commandMap := make(map[int]string)
     commandKey := strings.Split(command, "\n")
-    // commandValue := " "
     keyLength := len(commandKey)
-    // value := 0
 
     key := 0
     for key < keyLength {
         commandMap[key] = commandKey[key]
         key += 1
-
     }
 
     n := 0
-    // m := n + 1
     valueList := len(commandMap)
     fmt.Print("valueList: ", valueList)
     for n < valueList {
@@ -98,17 +72,13 @@ func ExampleCmd_Run() {
             var out bytes.Buffer
             cmd.Stdout = &out
             err := cmd.Run()
+            test := cmd.Wait()
             if err != nil {
         		log.Fatal(err)
+                log.Fatal(test)
         	}
-
             fmt.Printf(out.String())
-
-
-
             fmt.Print("\n")
-
-            // n += 1
 
         case len(list) == 3:
             fmt.Print("3", "\n")
@@ -122,17 +92,13 @@ func ExampleCmd_Run() {
             var out bytes.Buffer
             cmd.Stdout = &out
             err := cmd.Run()
+            test := cmd.Wait()
             if err != nil {
         		log.Fatal(err)
+                log.Fatal(test)
         	}
-
             fmt.Printf(out.String())
-
-
-
             fmt.Print("\n")
-
-            // n += 1
 
         case len(list) == 4:
             fmt.Print("4", "\n")
@@ -148,14 +114,62 @@ func ExampleCmd_Run() {
             var out bytes.Buffer
             cmd.Stdout = &out
             err := cmd.Run()
+            test := cmd.Wait()
             if err != nil {
         		log.Fatal(err)
+                log.Fatal(test)
         	}
 
             fmt.Printf(out.String())
             fmt.Print("\n")
 
-            // n += 1
+        case len(list) == 5:
+            fmt.Print("5", "\n")
+            com1 = list[0]
+            com2 = list[1]
+            com3 = list[2]
+            com4 = list[3]
+            com5 = list[4]
+            com1 = strings.TrimSpace(com1)
+            com2 = strings.TrimSpace(com2)
+            com3 = strings.TrimSpace(com3)
+            com4 = strings.TrimSpace(com4)
+            com5 = strings.TrimSpace(com5)
+            cmd = exec.Command(string(com1), string(com2), string(com3), string(com4), string(com5))
+            var out bytes.Buffer
+            cmd.Stdout = &out
+            err := cmd.Run()
+            if err != nil {
+                log.Fatal(err)
+            }
+
+            fmt.Printf(out.String())
+            fmt.Print("\n")
+
+        case len(list) == 6:
+            fmt.Print("6", "\n")
+            com1 = list[0]
+            com2 = list[1]
+            com3 = list[2]
+            com4 = list[3]
+            com5 = list[4]
+            com6 = list[5]
+            com1 = strings.TrimSpace(com1)
+            com2 = strings.TrimSpace(com2)
+            com3 = strings.TrimSpace(com3)
+            com4 = strings.TrimSpace(com4)
+            com5 = strings.TrimSpace(com5)
+            com6 = strings.TrimSpace(com5)
+            cmd = exec.Command(string(com1), string(com2), string(com3), string(com4), string(com5), string(com6) )
+            var out bytes.Buffer
+            cmd.Stdout = &out
+            err := cmd.Run()
+            if err != nil {
+                log.Fatal(err)
+            }
+
+            fmt.Printf(out.String())
+            fmt.Print("\n")
 
         }
 
