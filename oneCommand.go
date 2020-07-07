@@ -4,12 +4,12 @@ import (
 	"bytes"
 	// "context"
 	// "encoding/json"
-    // "bufio"
+    "bufio"
 	"fmt"
 	// "io"
 	"io/ioutil"
 	"log"
-	// "os"
+	"os"
 	"os/exec"
 	"strings"
 	// "time"
@@ -25,7 +25,14 @@ func readFile(){
 }
 
 func ExampleCmd_Run() {
-    fileContents, err3 := ioutil.ReadFile("text2.txt")
+
+    reader := bufio.NewReader(os.Stdin)
+    fmt.Print("Enter command file name: ")
+    comFile, _ := reader.ReadString('\n')
+    fmt.Print("Running command list " + comFile)
+    comFile = strings.TrimSpace(comFile)
+
+    fileContents, err3 := ioutil.ReadFile(comFile + ".txt")
     if err3 != nil {
         panic(err3)
     }
@@ -53,34 +60,37 @@ func ExampleCmd_Run() {
 
     n := 0
     valueList := len(commandMap)
-    fmt.Print("valueList: ", valueList)
+    // fmt.Print("valueList: ", valueList, "\n")
     for n < valueList {
         values := string(commandMap[n])
-        fmt.Print("VALUES: ", values, "\n")
+        // fmt.Print("VALUES: ", values, "\n")
         list := strings.Split(values, " ")
-        fmt.Print("LIST: ", list, "\n")
-        fmt.Print("\n")
+        // fmt.Print("LIST: ", list, "\n")
+        // fmt.Print("\n")
 
         switch {
 
         case len(list) == 1:
-            fmt.Print("1", "\n")
-            com1 = list[0]
-            com1 = strings.TrimSpace(com1)
-            cmd = exec.Command(string(com1))
-            var out bytes.Buffer
-            cmd.Stdout = &out
-            err := cmd.Run()
-            test := cmd.Wait()
-            if err != nil {
-                log.Fatal(err)
-                log.Fatal(test)
+            if list[0] == ""{
+
+            }else{
+                fmt.Print("1", "\n")
+                com1 = list[0]
+                com1 = strings.TrimSpace(com1)
+                cmd = exec.Command(string(com1))
+                var out bytes.Buffer
+                cmd.Stdout = &out
+                err := cmd.Run()
+                test := cmd.Wait()
+                if err != nil {
+                    log.Fatal(err)
+                    log.Fatal(test)
+                }
+                fmt.Printf(out.String())
             }
-            fmt.Printf(out.String())
-            fmt.Print("\n")
 
         case len(list) == 2:
-            fmt.Print("2", "\n")
+            // fmt.Print("2", "\n")
             com1 = list[0]
             com2 = list[1]
             com1 = strings.TrimSpace(com1)
@@ -95,7 +105,7 @@ func ExampleCmd_Run() {
                 log.Fatal(test)
         	}
             fmt.Printf(out.String())
-            fmt.Print("\n")
+            // fmt.Print("\n")
 
         case len(list) == 3:
             fmt.Print("3", "\n")
@@ -115,7 +125,7 @@ func ExampleCmd_Run() {
                 log.Fatal(test)
         	}
             fmt.Printf(out.String())
-            fmt.Print("\n")
+            // fmt.Print("\n")
 
         case len(list) == 4:
             fmt.Print("4", "\n")
@@ -138,7 +148,7 @@ func ExampleCmd_Run() {
         	}
 
             fmt.Printf(out.String())
-            fmt.Print("\n")
+            // fmt.Print("\n")
 
         case len(list) == 5:
             fmt.Print("5", "\n")
@@ -163,7 +173,7 @@ func ExampleCmd_Run() {
         	}
 
             fmt.Printf(out.String())
-            fmt.Print("\n")
+            // fmt.Print("\n")
 
         case len(list) == 6:
             fmt.Print("6", "\n")
@@ -178,7 +188,7 @@ func ExampleCmd_Run() {
             com3 = strings.TrimSpace(com3)
             com4 = strings.TrimSpace(com4)
             com5 = strings.TrimSpace(com5)
-            com6 = strings.TrimSpace(com5)
+            com6 = strings.TrimSpace(com6)
             cmd = exec.Command(string(com1), string(com2), string(com3), string(com4), string(com5), string(com6) )
             var out bytes.Buffer
             cmd.Stdout = &out
@@ -190,7 +200,7 @@ func ExampleCmd_Run() {
         	}
 
             fmt.Printf(out.String())
-            fmt.Print("\n")
+            // fmt.Print("\n")
 
         }
 
