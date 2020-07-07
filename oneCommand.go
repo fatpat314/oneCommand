@@ -16,11 +16,11 @@ import (
 )
 
 func readFile(){
-    fileContents, err := ioutil.ReadFile("text2.txt")
-    if err != nil {
-        panic(err)
-    }
-    fmt.Print(string(fileContents))
+    reader := bufio.NewReader(os.Stdin)
+    fmt.Print("Enter command file name: ")
+    comFile, _ := reader.ReadString('\n')
+    fmt.Print("Running command list " + comFile)
+    comFile = strings.TrimSpace(comFile)
     return
 }
 
