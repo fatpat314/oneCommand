@@ -256,7 +256,7 @@ func main(){
     t := true
     for t == true {
         starter := bufio.NewReader(os.Stdin)
-        color.Green.Print("\n", "Enter 'Run' to do run a command file.", "\n", "Enter 'New' to create a new command file.", "\n", "Enter 'Show' to see the contents of a command file.", "\n", "Enter 'Help' for more information.", "\n", "Enter 'End' to end the program.", "\n", "\n", "Enter: ")
+        color.Green.Print("\n", "Enter 'Run' to do run a command file.", "\n", "Enter 'Help' for more information.", "\n", "Enter 'End' to end the program.", "\n", "\n", "Enter: ")
         // fmt.Print("Enter 'N' to create a new file.", "\n")
         a, _ := starter.ReadString('\n')
         a = strings.TrimSpace(a)
@@ -277,14 +277,23 @@ func main(){
             Cmd_Create()
 
         case string(a) == "HELP":
-            color.Green.Print("\n", "NEW", "\n", "When you are creating a new command file the name of that file is used to create a .txt file. The command lines you enter are then processed to create each command as a seperate line in the command file written in sequence", "\n")
-            color.Green.Print("\n", "RUN", "\n", "When you are running an already existing command file the lines of commands that are stored in the corresponding .txt are executed in sequence.", "\n", "\n")
+            color.Green.Print("\n", "ENTER: NEW", "\n", "Creates a new command file. You can then name the command file and enter each command, line by line, seperated by a ', ' for each command line.", "\n")
+            color.Green.Print("\n", "ENTER: RUN", "\n", "Runs a existing command file. Choose the command to run by the name of the command file.", "\n")
+            color.Green.Print("\n", "ENTER: LIST", "\n", "Shows a list of all of the of the existing command files", "\n")
+            color.Green.Print("\n", "ENTER: SHOW", "\n", "Shows the contents of an existing command file. The file that is shown is chosen by name", "\n")
+            color.Green.Print("\n", "ENTER: END", "\n", "Exits the program")
         case string(a) == "Help":
-            color.Green.Print("\n", "NEW", "\n", "When you are creating a new command file the name of that file is used to create a .txt file. The command lines you enter are then processed to create each command as a seperate line in the command file written in sequence", "\n")
-            color.Green.Print("\n", "RUN", "\n", "When you are running an already existing command file the lines of commands that are stored in the corresponding .txt are executed in sequence.", "\n", "\n")
+            color.Green.Print("\n", "ENTER: NEW", "\n", "Creates a new command file. You can then name the command file and enter each command, line by line, seperated by a ', ' for each command line.", "\n")
+            color.Green.Print("\n", "ENTER: RUN", "\n", "Runs a existing command file. Choose the command to run by the name of the command file.", "\n")
+            color.Green.Print("\n", "ENTER: LIST", "\n", "Shows a list of all of the of the existing command files", "\n")
+            color.Green.Print("\n", "ENTER: SHOW", "\n", "Shows the contents of an existing command file. The file that is shown is chosen by name", "\n")
+            color.Green.Print("\n", "END", "\n", "Exits the program", "\n", "\n")
         case string(a) == "help":
-            color.Green.Print("\n", "NEW", "\n", "When you are creating a new command file the name of that file is used to create a .txt file. The command lines you enter are then processed to create each command as a seperate line in the command file written in sequence", "\n")
-            color.Green.Print("\n", "RUN", "\n", "When you are running an already existing command file the lines of commands that are stored in the corresponding .txt are executed in sequence.", "\n", "\n")
+            color.Green.Print("\n", "ENTER: NEW", "\n", "Creates a new command file. You can then name the command file and enter each command, line by line, seperated by a ', ' for each command line.", "\n")
+            color.Green.Print("\n", "ENTER: RUN", "\n", "Runs a existing command file. Choose the command to run by the name of the command file.", "\n")
+            color.Green.Print("\n", "ENTER: LIST", "\n", "Shows a list of all of the of the existing command files", "\n")
+            color.Green.Print("\n", "ENTER: SHOW", "\n", "Shows the contents of an existing command file. The file that is shown is chosen by name", "\n")
+            color.Green.Print("\n", "ENTER: END", "\n", "Exits the program", "\n", "\n")
 
         case string(a) == "SHOW":
             Cmd_Show()
@@ -293,6 +302,10 @@ func main(){
         case string(a) == "show":
             Cmd_Show()
 
+        case string(a) == "LIST":
+            Cmd_List()
+        case string(a) == "List":
+            Cmd_List()
         case string(a) == "list":
             Cmd_List()
 
