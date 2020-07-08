@@ -2,8 +2,6 @@ package main
 
 import (
 	"bytes"
-	// "context"
-	// "encoding/json"
     "bufio"
 	"fmt"
 	// "io"
@@ -16,6 +14,30 @@ import (
 
     "github.com/briandowns/spinner"
 )
+// func Cmd_write(){
+//
+// }
+func Cmd_create(){
+    reader := bufio.NewReader(os.Stdin)
+    fmt.Print("Name new command file: ", "\n")
+    fileName, _ := reader.ReadString('\n')
+    fileName = strings.TrimSpace(fileName)
+    fileName = fileName + ".txt"
+    os.Create(fileName)
+
+    // Cmd_write
+    writer := bufio.NewReader(os.Stdin)
+    fmt.Print("Write Commands: ")
+    fileWrite, _ := writer.ReadString('\n')
+    f := strings.Replace(fileWrite, ",", "\n", -1)
+    fmt.Print(f, "\n")
+
+    s := []byte(f)
+    err := ioutil.WriteFile(fileName, s, 0777)
+    if err != nil {
+        fmt.Println(err)
+    }
+}
 
 func readFile(){
     reader := bufio.NewReader(os.Stdin)
@@ -23,15 +45,15 @@ func readFile(){
     comFile, _ := reader.ReadString('\n')
     fmt.Print("Running command list " + comFile)
     comFile = strings.TrimSpace(comFile)
-    return
+    // return
 }
 
-func ExampleCmd_Run() {
+func Cmd_Run() {
 
     reader := bufio.NewReader(os.Stdin)
     fmt.Print("Enter command file name: ")
     comFile, _ := reader.ReadString('\n')
-    fmt.Print("Running command list " + comFile, "\n")
+    fmt.Print("Running command list: " + comFile, "\n")
     comFile = strings.TrimSpace(comFile)
 
     s := spinner.New(spinner.CharSets[36], 100*time.Millisecond)  // Build our new spinner
@@ -70,19 +92,14 @@ func ExampleCmd_Run() {
 
     n := 0
     valueList := len(commandMap)
-    // fmt.Print("valueList: ", valueList, "\n")
     for n < valueList {
         values := string(commandMap[n])
-        // fmt.Print("VALUES: ", values, "\n")
         list := strings.Split(values, " ")
-        // fmt.Print("LIST: ", list, "\n")
-        // fmt.Print("\n")
 
         switch {
-
         case len(list) == 1:
             if list[0] == ""{
-
+                // do nothing
             }else{
                 fmt.Print("\n")
                 com1 = list[0]
@@ -100,7 +117,7 @@ func ExampleCmd_Run() {
             }
 
         case len(list) == 2:
-            // fmt.Print("2", "\n")
+            fmt.Print("\n")
             com1 = list[0]
             com2 = list[1]
             com1 = strings.TrimSpace(com1)
@@ -115,7 +132,6 @@ func ExampleCmd_Run() {
                 log.Fatal(test)
         	}
             fmt.Printf(out.String())
-            // fmt.Print("\n")
 
         case len(list) == 3:
             fmt.Print("\n")
@@ -135,7 +151,6 @@ func ExampleCmd_Run() {
                 log.Fatal(test)
         	}
             fmt.Printf(out.String())
-            // fmt.Print("\n")
 
         case len(list) == 4:
             fmt.Print("\n")
@@ -156,9 +171,7 @@ func ExampleCmd_Run() {
         		log.Fatal(err)
                 log.Fatal(test)
         	}
-
             fmt.Printf(out.String())
-            // fmt.Print("\n")
 
         case len(list) == 5:
             fmt.Print("\n")
@@ -181,8 +194,8 @@ func ExampleCmd_Run() {
         		log.Fatal(err)
                 log.Fatal(test)
         	}
-
             fmt.Printf(out.String())
+
         case len(list) == 6:
             fmt.Print("\n")
             com1 = list[0]
@@ -213,8 +226,31 @@ func ExampleCmd_Run() {
 }
 
 func main(){
+    starter := bufio.NewReader(os.Stdin)
+    fmt.Print("Enter 'X' to do run a file: ")
+    fmt.Print("Enter 'N' to create a new file: ")
+    a, _ := starter.ReadString('\n')
+    a = strings.TrimSpace(a)
+    // fmt.Print(a)
+    switch {
+    case string(a) == "X":
+        fmt.Print(a, "\n")
+        Cmd_Run()
+
+    case string(a) == "x":
+        fmt.Print(a, "\n")
+        Cmd_Run()
+
+    case string(a) == "N":
+        fmt.Print(a, "\n")
+        Cmd_create()
+
+    case string(a) == "n":
+        fmt.Print(a, "\n")
+        Cmd_create()
+}
     // readFile()
-    ExampleCmd_Run()
+    // ExampleCmd_Run()
 
     // reader := bufio.NewReader(os.Stdin)
     // fmt.Print("Enter your city: ")
