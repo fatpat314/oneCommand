@@ -273,7 +273,7 @@ func main(){
             t = false
         case string(a) == "End":
             t = false
-        case string(a) == "End":
+        case string(a) == "end":
             t = false
         }
     }
