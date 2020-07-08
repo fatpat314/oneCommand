@@ -30,7 +30,6 @@ func Cmd_create(){
     fmt.Print("Write Commands: ", "\n")
     fileWrite, _ := writer.ReadString('\n')
     f := strings.Replace(fileWrite, ", ", "\n", -1)
-    // f = strings.Replace(fileWrite, ",", "\n", -1)
     fmt.Print(f, "\n")
 
     s := []byte(f)
@@ -40,13 +39,19 @@ func Cmd_create(){
     }
 }
 
-func readFile(){
+func Cmd_Show(){
     reader := bufio.NewReader(os.Stdin)
     fmt.Print("Enter command file name: ")
+    fmt.Print("\n")
     comFile, _ := reader.ReadString('\n')
-    fmt.Print("Running command list " + comFile)
     comFile = strings.TrimSpace(comFile)
-    // return
+    comFile = comFile + ".txt"
+    content, err := ioutil.ReadFile(comFile)
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Print("", "\n")
+    fmt.Print("Command list: ", "\n" + string(content), "\n")
 }
 
 func Cmd_Run() {
@@ -228,27 +233,39 @@ func Cmd_Run() {
 
 func main(){
     starter := bufio.NewReader(os.Stdin)
-    fmt.Print("Enter 'X' to do run a file: ")
-    fmt.Print("Enter 'N' to create a new file: ")
+    fmt.Print("Enter 'Run' to do run a command file.", "\n", "Enter 'New' to create a new command file.", "\n", "Enter 'Show' to see the contents of a command file.", "\n", "Enter 'Help' for more information.", "\n", "Enter: ")
+    // fmt.Print("Enter 'N' to create a new file.", "\n")
     a, _ := starter.ReadString('\n')
     a = strings.TrimSpace(a)
     // fmt.Print(a)
     switch {
-    case string(a) == "X":
-        fmt.Print(a, "\n")
+    case string(a) == "RUN":
+        Cmd_Run()
+    case string(a) == "Run":
+        Cmd_Run()
+    case string(a) == "run":
         Cmd_Run()
 
-    case string(a) == "x":
-        fmt.Print(a, "\n")
-        Cmd_Run()
-
-    case string(a) == "N":
-        fmt.Print(a, "\n")
+    case string(a) == "NEW":
+        Cmd_create()
+    case string(a) == "New":
+        Cmd_create()
+    case string(a) == "new":
         Cmd_create()
 
-    case string(a) == "n":
-        fmt.Print(a, "\n")
-        Cmd_create()
+    case string(a) == "Help":
+        fmt.Print("\n", "When you are creating a new command file the name of that file is used to create a .txt file. The command lines you enter are then processed to create each command as a seperate line in the command file written in sequence", "\n")
+        fmt.Print("\n", "When you are running an already existing command file the lines of commands that are stored in the corresponding .txt are executed in sequence.", "\n")
+    case string(a) == "help":
+        fmt.Print("\n", "When you are creating a new command file the name of that file is used to create a .txt file. The command lines you enter are then processed to create each command as a seperate line in the command file written in sequence", "\n")
+        fmt.Print("\n", "When you are running an already existing command file the lines of commands that are stored in the corresponding .txt are executed in sequence.", "\n")
+
+    case string(a) == "SHOW":
+        Cmd_Show()
+    case string(a) == "Show":
+        Cmd_Show()
+    case string(a) == "show":
+        Cmd_Show()
 }
     // readFile()
     // ExampleCmd_Run()
