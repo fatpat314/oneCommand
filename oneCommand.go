@@ -5,20 +5,21 @@ import (
     "bufio"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"os/exec"
 	"strings"
 	"time"
+    "flag"
 
     "github.com/briandowns/spinner"
+    "github.com/gookit/color"
 )
 // func Cmd_write(){
 //
 // }
-func Cmd_create(){
+func Cmd_Create(){
     reader := bufio.NewReader(os.Stdin)
-    fmt.Print("Name new command file: ")
+    color.Green.Print("Name new command file: ")
     fileName, _ := reader.ReadString('\n')
     fileName = strings.TrimSpace(fileName)
     fileName = fileName + ".txt"
@@ -26,7 +27,7 @@ func Cmd_create(){
 
     // Cmd_write
     writer := bufio.NewReader(os.Stdin)
-    fmt.Print("Write Commands: ", "\n")
+    color.Green.Print("Write Commands: ", "\n")
     fileWrite, _ := writer.ReadString('\n')
     f := strings.Replace(fileWrite, ", ", "\n", -1)
     fmt.Print(f, "\n")
@@ -34,31 +35,51 @@ func Cmd_create(){
     s := []byte(f)
     err := ioutil.WriteFile(fileName, s, 0777)
     if err != nil {
-        fmt.Println(err)
+        color.Red.Println(err)
     }
 }
 
 func Cmd_Show(){
     reader := bufio.NewReader(os.Stdin)
-    fmt.Print("Enter command file name: ")
+    color.Green.Print("Enter command file name: ")
     fmt.Print("\n")
     comFile, _ := reader.ReadString('\n')
     comFile = strings.TrimSpace(comFile)
     comFile = comFile + ".txt"
     content, err := ioutil.ReadFile(comFile)
     if err != nil {
-        log.Fatal(err)
+        color.Red.Print(err)
     }
     fmt.Print("", "\n")
-    fmt.Print(comFile, " Command list: ", "\n" + string(content), "\n")
+    color.Green.Print(comFile, " Command list: ")
+    fmt.Print("\n" + string(content), "\n")
+}
+
+func Cmd_List(){
+    dir := flag.String("dir", ".", "Find all.txt")
+    file, err := os.Open(*dir)
+    if err != nil{
+        color.Red.Print("failed opening directory: %s", err)
+    }
+    defer file.Close()
+    list, _ := file.Readdirnames(0)
+    i := 0
+    for i < len(list){
+        if strings.Contains(list[i], ".txt"){
+            fmt.Print(list[i], "\n")
+        }
+        i += 1
+    }
+    fmt.Print("\n")
 }
 
 func Cmd_Run() {
 
     reader := bufio.NewReader(os.Stdin)
-    fmt.Print("Enter command file name: ")
+    color.Green.Print("Enter command file name: ")
     comFile, _ := reader.ReadString('\n')
-    fmt.Print("Running command list: " + comFile, "\n")
+    color.Green.Print("Running command list: ")
+    fmt.Print(comFile, "\n")
     comFile = strings.TrimSpace(comFile)
 
     s := spinner.New(spinner.CharSets[36], 100*time.Millisecond)  // Build our new spinner
@@ -71,7 +92,7 @@ func Cmd_Run() {
 
     fileContents, err3 := ioutil.ReadFile(comFile + ".txt")
     if err3 != nil {
-        panic(err3)
+        color.Red.Print(err3)
     }
     fmt.Print(string(fileContents))
     command := string(fileContents)
@@ -115,8 +136,8 @@ func Cmd_Run() {
                 err := cmd.Run()
                 test := cmd.Wait()
                 if err != nil {
-                    log.Fatal(err)
-                    log.Fatal(test)
+                    color.Red.Print(err)
+                    color.Red.Print(test)
                 }
                 fmt.Printf(out.String())
             }
@@ -133,8 +154,8 @@ func Cmd_Run() {
             err := cmd.Run()
             test := cmd.Wait()
             if err != nil {
-        		log.Fatal(err)
-                log.Fatal(test)
+                color.Red.Print(err)
+                color.Red.Print(test)
         	}
             fmt.Printf(out.String())
 
@@ -152,8 +173,8 @@ func Cmd_Run() {
             err := cmd.Run()
             test := cmd.Wait()
             if err != nil {
-        		log.Fatal(err)
-                log.Fatal(test)
+                color.Red.Print(err)
+                color.Red.Print(test)
         	}
             fmt.Printf(out.String())
 
@@ -173,8 +194,8 @@ func Cmd_Run() {
             err := cmd.Run()
             test := cmd.Wait()
             if err != nil {
-        		log.Fatal(err)
-                log.Fatal(test)
+                color.Red.Print(err)
+                color.Red.Print(test)
         	}
             fmt.Printf(out.String())
 
@@ -196,8 +217,8 @@ func Cmd_Run() {
             err := cmd.Run()
             test := cmd.Wait()
             if err != nil {
-        		log.Fatal(err)
-                log.Fatal(test)
+                color.Red.Print(err)
+                color.Red.Print(test)
         	}
             fmt.Printf(out.String())
 
@@ -221,8 +242,8 @@ func Cmd_Run() {
             err := cmd.Run()
             test := cmd.Wait()
             if err != nil {
-        		log.Fatal(err)
-                log.Fatal(test)
+                color.Red.Print(err)
+                color.Red.Print(test)
         	}
             fmt.Printf(out.String())
         }
@@ -231,11 +252,11 @@ func Cmd_Run() {
 }
 
 func main(){
-    t := true
 
+    t := true
     for t == true {
         starter := bufio.NewReader(os.Stdin)
-        fmt.Print("Enter 'Run' to do run a command file.", "\n", "Enter 'New' to create a new command file.", "\n", "Enter 'Show' to see the contents of a command file.", "\n", "Enter 'Help' for more information.", "\n", "\n", "Enter: ")
+        color.Green.Print("\n", "Enter 'Run' to do run a command file.", "\n", "Enter 'New' to create a new command file.", "\n", "Enter 'Show' to see the contents of a command file.", "\n", "Enter 'Help' for more information.", "\n", "Enter 'End' to end the program.", "\n", "\n", "Enter: ")
         // fmt.Print("Enter 'N' to create a new file.", "\n")
         a, _ := starter.ReadString('\n')
         a = strings.TrimSpace(a)
@@ -249,18 +270,21 @@ func main(){
             Cmd_Run()
 
         case string(a) == "NEW":
-            Cmd_create()
+            Cmd_Create()
         case string(a) == "New":
-            Cmd_create()
+            Cmd_Create()
         case string(a) == "new":
-            Cmd_create()
+            Cmd_Create()
 
+        case string(a) == "HELP":
+            color.Green.Print("\n", "NEW", "\n", "When you are creating a new command file the name of that file is used to create a .txt file. The command lines you enter are then processed to create each command as a seperate line in the command file written in sequence", "\n")
+            color.Green.Print("\n", "RUN", "\n", "When you are running an already existing command file the lines of commands that are stored in the corresponding .txt are executed in sequence.", "\n", "\n")
         case string(a) == "Help":
-            fmt.Print("\n", "When you are creating a new command file the name of that file is used to create a .txt file. The command lines you enter are then processed to create each command as a seperate line in the command file written in sequence", "\n")
-            fmt.Print("\n", "When you are running an already existing command file the lines of commands that are stored in the corresponding .txt are executed in sequence.", "\n")
+            color.Green.Print("\n", "NEW", "\n", "When you are creating a new command file the name of that file is used to create a .txt file. The command lines you enter are then processed to create each command as a seperate line in the command file written in sequence", "\n")
+            color.Green.Print("\n", "RUN", "\n", "When you are running an already existing command file the lines of commands that are stored in the corresponding .txt are executed in sequence.", "\n", "\n")
         case string(a) == "help":
-            fmt.Print("\n", "When you are creating a new command file the name of that file is used to create a .txt file. The command lines you enter are then processed to create each command as a seperate line in the command file written in sequence", "\n")
-            fmt.Print("\n", "When you are running an already existing command file the lines of commands that are stored in the corresponding .txt are executed in sequence.", "\n")
+            color.Green.Print("\n", "NEW", "\n", "When you are creating a new command file the name of that file is used to create a .txt file. The command lines you enter are then processed to create each command as a seperate line in the command file written in sequence", "\n")
+            color.Green.Print("\n", "RUN", "\n", "When you are running an already existing command file the lines of commands that are stored in the corresponding .txt are executed in sequence.", "\n", "\n")
 
         case string(a) == "SHOW":
             Cmd_Show()
@@ -268,6 +292,9 @@ func main(){
             Cmd_Show()
         case string(a) == "show":
             Cmd_Show()
+
+        case string(a) == "list":
+            Cmd_List()
 
         case string(a) == "END":
             t = false
