@@ -19,7 +19,7 @@ import (
 // }
 func Cmd_create(){
     reader := bufio.NewReader(os.Stdin)
-    fmt.Print("Name new command file: ", "\n")
+    fmt.Print("Name new command file: ")
     fileName, _ := reader.ReadString('\n')
     fileName = strings.TrimSpace(fileName)
     fileName = fileName + ".txt"
@@ -27,9 +27,10 @@ func Cmd_create(){
 
     // Cmd_write
     writer := bufio.NewReader(os.Stdin)
-    fmt.Print("Write Commands: ")
+    fmt.Print("Write Commands: ", "\n")
     fileWrite, _ := writer.ReadString('\n')
-    f := strings.Replace(fileWrite, ",", "\n", -1)
+    f := strings.Replace(fileWrite, ", ", "\n", -1)
+    // f = strings.Replace(fileWrite, ",", "\n", -1)
     fmt.Print(f, "\n")
 
     s := []byte(f)

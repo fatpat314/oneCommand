@@ -1,2 +1,4 @@
-cat text.txt
-cat text3.txt
+say hi
+say does
+say this
+say work?
