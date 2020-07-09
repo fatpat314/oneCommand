@@ -14,9 +14,7 @@ import (
     "github.com/briandowns/spinner"
     "github.com/gookit/color"
 )
-// func Cmd_write(){
-//
-// }
+
 func Cmd_Create(){
     reader := bufio.NewReader(os.Stdin)
     color.Green.Print("Name new command file: ")
@@ -71,6 +69,14 @@ func Cmd_List(){
         i += 1
     }
     fmt.Print("\n")
+}
+
+func Cmd_Help(){
+    color.Green.Print("\n", "ENTER: NEW", "\n", "Creates a new command file. You can then name the command file and enter each command, line by line, seperated by a ', ' for each command line.", "\n")
+    color.Green.Print("\n", "ENTER: RUN", "\n", "Runs a existing command file. Choose the command to run by the name of the command file.", "\n")
+    color.Green.Print("\n", "ENTER: LIST", "\n", "Shows a list of all of the of the existing command files", "\n")
+    color.Green.Print("\n", "ENTER: SHOW", "\n", "Shows the contents of an existing command file. The file that is shown is chosen by name", "\n")
+    color.Green.Print("\n", "ENTER: END", "\n", "Exits the program", "\n", "\n")
 }
 
 func Cmd_Run() {
@@ -257,10 +263,8 @@ func main(){
     for t == true {
         starter := bufio.NewReader(os.Stdin)
         color.Green.Print("\n", "Enter 'Run' to do run a command file.", "\n", "Enter 'Help' for more information.", "\n", "Enter 'End' to end the program.", "\n", "\n", "Enter: ")
-        // fmt.Print("Enter 'N' to create a new file.", "\n")
         a, _ := starter.ReadString('\n')
         a = strings.TrimSpace(a)
-        // fmt.Print(a)
         switch {
         case string(a) == "RUN":
             Cmd_Run()
@@ -277,23 +281,11 @@ func main(){
             Cmd_Create()
 
         case string(a) == "HELP":
-            color.Green.Print("\n", "ENTER: NEW", "\n", "Creates a new command file. You can then name the command file and enter each command, line by line, seperated by a ', ' for each command line.", "\n")
-            color.Green.Print("\n", "ENTER: RUN", "\n", "Runs a existing command file. Choose the command to run by the name of the command file.", "\n")
-            color.Green.Print("\n", "ENTER: LIST", "\n", "Shows a list of all of the of the existing command files", "\n")
-            color.Green.Print("\n", "ENTER: SHOW", "\n", "Shows the contents of an existing command file. The file that is shown is chosen by name", "\n")
-            color.Green.Print("\n", "ENTER: END", "\n", "Exits the program")
+            Cmd_Help()
         case string(a) == "Help":
-            color.Green.Print("\n", "ENTER: NEW", "\n", "Creates a new command file. You can then name the command file and enter each command, line by line, seperated by a ', ' for each command line.", "\n")
-            color.Green.Print("\n", "ENTER: RUN", "\n", "Runs a existing command file. Choose the command to run by the name of the command file.", "\n")
-            color.Green.Print("\n", "ENTER: LIST", "\n", "Shows a list of all of the of the existing command files", "\n")
-            color.Green.Print("\n", "ENTER: SHOW", "\n", "Shows the contents of an existing command file. The file that is shown is chosen by name", "\n")
-            color.Green.Print("\n", "END", "\n", "Exits the program", "\n", "\n")
+            Cmd_Help()
         case string(a) == "help":
-            color.Green.Print("\n", "ENTER: NEW", "\n", "Creates a new command file. You can then name the command file and enter each command, line by line, seperated by a ', ' for each command line.", "\n")
-            color.Green.Print("\n", "ENTER: RUN", "\n", "Runs a existing command file. Choose the command to run by the name of the command file.", "\n")
-            color.Green.Print("\n", "ENTER: LIST", "\n", "Shows a list of all of the of the existing command files", "\n")
-            color.Green.Print("\n", "ENTER: SHOW", "\n", "Shows the contents of an existing command file. The file that is shown is chosen by name", "\n")
-            color.Green.Print("\n", "ENTER: END", "\n", "Exits the program", "\n", "\n")
+            Cmd_Help()
 
         case string(a) == "SHOW":
             Cmd_Show()
