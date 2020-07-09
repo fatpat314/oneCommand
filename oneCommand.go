@@ -15,7 +15,7 @@ import (
     "github.com/gookit/color"
 )
 
-func Cmd_Create(){
+func CmdCreate(){
     reader := bufio.NewReader(os.Stdin)
     color.Green.Print("Name new command file: ")
     fileName, _ := reader.ReadString('\n')
@@ -23,7 +23,7 @@ func Cmd_Create(){
     fileName = fileName + ".txt"
     os.Create(fileName)
 
-    // Cmd_write
+    // Cmdwrite
     writer := bufio.NewReader(os.Stdin)
     color.Green.Print("Write Commands: ", "\n")
     fileWrite, _ := writer.ReadString('\n')
@@ -37,7 +37,7 @@ func Cmd_Create(){
     }
 }
 
-func Cmd_Show(){
+func CmdShow(){
     reader := bufio.NewReader(os.Stdin)
     color.Green.Print("Enter command file name: ")
     fmt.Print("\n")
@@ -53,7 +53,7 @@ func Cmd_Show(){
     fmt.Print("\n" + string(content), "\n")
 }
 
-func Cmd_List(){
+func CmdList(){
     dir := flag.String("dir", ".", "Find all.txt")
     file, err := os.Open(*dir)
     if err != nil{
@@ -71,7 +71,7 @@ func Cmd_List(){
     fmt.Print("\n")
 }
 
-func Cmd_Help(){
+func CmdHelp(){
     color.Green.Print("\n", "ENTER: NEW", "\n", "Creates a new command file. You can then name the command file and enter each command, line by line, seperated by a ', ' for each command line.", "\n")
     color.Green.Print("\n", "ENTER: RUN", "\n", "Runs a existing command file. Choose the command to run by the name of the command file.", "\n")
     color.Green.Print("\n", "ENTER: LIST", "\n", "Shows a list of all of the of the existing command files", "\n")
@@ -79,7 +79,7 @@ func Cmd_Help(){
     color.Green.Print("\n", "ENTER: END", "\n", "Exits the program", "\n", "\n")
 }
 
-func Cmd_Run() {
+func CmdRun() {
 
     reader := bufio.NewReader(os.Stdin)
     color.Green.Print("Enter command file name: ")
@@ -267,39 +267,39 @@ func main(){
         a = strings.TrimSpace(a)
         switch {
         case string(a) == "RUN":
-            Cmd_Run()
+            CmdRun()
         case string(a) == "Run":
-            Cmd_Run()
+            CmdRun()
         case string(a) == "run":
-            Cmd_Run()
+            CmdRun()
 
         case string(a) == "NEW":
-            Cmd_Create()
+            CmdCreate()
         case string(a) == "New":
-            Cmd_Create()
+            CmdCreate()
         case string(a) == "new":
-            Cmd_Create()
+            CmdCreate()
 
         case string(a) == "HELP":
-            Cmd_Help()
+            CmdHelp()
         case string(a) == "Help":
-            Cmd_Help()
+            CmdHelp()
         case string(a) == "help":
-            Cmd_Help()
+            CmdHelp()
 
         case string(a) == "SHOW":
-            Cmd_Show()
+            CmdShow()
         case string(a) == "Show":
-            Cmd_Show()
+            CmdShow()
         case string(a) == "show":
-            Cmd_Show()
+            CmdShow()
 
         case string(a) == "LIST":
-            Cmd_List()
+            CmdList()
         case string(a) == "List":
-            Cmd_List()
+            CmdList()
         case string(a) == "list":
-            Cmd_List()
+            CmdList()
 
         case string(a) == "END":
             t = false
