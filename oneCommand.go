@@ -72,7 +72,7 @@ func CmdList(){
 }
 
 func CmdHelp(){
-    color.Green.Print("\n", "ENTER: NEW", "\n", "Creates a new command file. You can then name the command file and enter each command, line by line, seperated by a ', ' for each command line.", "\n")
+    color.Green.Print("\n", "ENTER: NEW", "\n", "Creates a new command file. You can then name the command file and enter each command, line by line, separated by a ', ' for each command line.", "\n")
     color.Green.Print("\n", "ENTER: RUN", "\n", "Runs a existing command file. Choose the command to run by the name of the command file.", "\n")
     color.Green.Print("\n", "ENTER: LIST", "\n", "Shows a list of all of the of the existing command files", "\n")
     color.Green.Print("\n", "ENTER: SHOW", "\n", "Shows the contents of an existing command file. The file that is shown is chosen by name", "\n")
