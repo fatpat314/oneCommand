@@ -3,7 +3,7 @@
 
 # oneCommand
 
-oneCommand is a simple command line tool that distill sequences of commands into a single word or line. 
+oneCommand is a simple command line tool that distill sequences of commands into a single word or line.
 
 
 
@@ -18,9 +18,7 @@ func CmdHelp()
     command line
 
 func CmdList()
-    CmdList filters through the directory to find all .txt and prints the list
-
-        out to the user.
+    CmdList filters through the directory to find all .txt and prints the list out to the user.
 
 func CmdRun()
     CmdRun takes user input to determine which .txt file to run and exicutes the
