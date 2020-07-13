@@ -1,12 +1,13 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/fatpat314/oneCommand)](https://goreportcard.com/report/github.com/fatpat314/oneCommand)
 
 
-# H1
-oneCommand 
+# oneCommand
+
+oneCommand is a simple command line tool that distill sequences of commands into a single word or line. 
 
 
 
-FUNCTIONS
+### FUNCTIONS
 
 func CmdCreate()
     CmdCreate takes command line input from the user that is used to generate a
