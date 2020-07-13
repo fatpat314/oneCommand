@@ -6,6 +6,16 @@
 oneCommand is a simple command line tool that distill sequences of commands into a single word or line.
 
 
+## Useage
+RUN: Runs an existing command sequence.
+
+NEW: Lets a user create a new command sequence.
+
+HELP: Gives the user more instruction.
+
+END: Ends the program.
+
+
 
 ### FUNCTIONS
 
