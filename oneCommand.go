@@ -15,20 +15,27 @@ import (
     "github.com/gookit/color"
 )
 
+// CmdCreate takes command line input from the user that is used to generate
+// a .txt file which stores the commands you with to run.
 func CmdCreate(){
     reader := bufio.NewReader(os.Stdin)
     color.Green.Print("Name new command file: ")
     fileName, _ := reader.ReadString('\n')
     fileName = strings.TrimSpace(fileName)
+	if fileName == ""{
+		fileName = "TEST"
+	}
     fileName = fileName + ".txt"
     os.Create(fileName)
 
     // Cmdwrite
+	// CmdWrite takes command line input and uses it to write Commands
+	// into the newly created .txt file
     writer := bufio.NewReader(os.Stdin)
     color.Green.Print("Write Commands: ", "\n")
     fileWrite, _ := writer.ReadString('\n')
     f := strings.Replace(fileWrite, ", ", "\n", -1)
-    fmt.Print(f, "\n")
+    fmt.Printf(f, "\n")
 
     s := []byte(f)
     err := ioutil.WriteFile(fileName, s, 0777)
@@ -36,7 +43,8 @@ func CmdCreate(){
         color.Red.Println(err)
     }
 }
-
+// CmdShow takes user input to find an exsisting file and prints each line
+// of commands so the user can read the list of commands.
 func CmdShow(){
     reader := bufio.NewReader(os.Stdin)
     color.Green.Print("Enter command file name: ")
@@ -53,6 +61,8 @@ func CmdShow(){
     fmt.Print("\n" + string(content), "\n")
 }
 
+// CmdList filters through the directory to find all .txt and prints the list
+// 	out to the user.
 func CmdList(){
     dir := flag.String("dir", ".", "Find all.txt")
     file, err := os.Open(*dir)
@@ -71,6 +81,7 @@ func CmdList(){
     fmt.Print("\n")
 }
 
+//CmdHelp is just used to give extra instruction that are printed to the command line
 func CmdHelp(){
     color.Green.Print("\n", "ENTER: NEW", "\n", "Creates a new command file. You can then name the command file and enter each command, line by line, separated by a ', ' for each command line.", "\n")
     color.Green.Print("\n", "ENTER: RUN", "\n", "Runs a existing command file. Choose the command to run by the name of the command file.", "\n")
@@ -79,8 +90,9 @@ func CmdHelp(){
     color.Green.Print("\n", "ENTER: END", "\n", "Exits the program", "\n", "\n")
 }
 
+// CmdRun takes user input to determine which .txt file to run and exicutes the Commands
+// in that file in the order they appear.
 func CmdRun() {
-
     reader := bufio.NewReader(os.Stdin)
     color.Green.Print("Enter command file name: ")
     comFile, _ := reader.ReadString('\n')
