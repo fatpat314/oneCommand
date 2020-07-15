@@ -100,6 +100,7 @@ func CmdRun() {
     fmt.Print(comFile, "\n")
     comFile = strings.TrimSpace(comFile)
 
+	// Pretty colors
     s := spinner.New(spinner.CharSets[36], 100*time.Millisecond)  // Build our new spinner
     s.Color("red")
     s.Start()                                                    // Start the spinner
