@@ -122,6 +122,10 @@ func CmdRun() {
     com4 := " "
     com5 := " "
     com6 := " "
+	com7 := " "
+	com8 := " "
+	com9 := " "
+	com10 := " "
     cmd := exec.Command(string(com1), string(com2))
 
     // for each line in text
@@ -265,6 +269,126 @@ func CmdRun() {
                 color.Red.Print(test)
         	}
             fmt.Printf(out.String())
+
+		case len(list) == 7:
+			fmt.Print("\n")
+			com1 = list[0]
+			com2 = list[1]
+			com3 = list[2]
+			com4 = list[3]
+			com5 = list[4]
+			com6 = list[5]
+			com7 = list[6]
+			com1 = strings.TrimSpace(com1)
+			com2 = strings.TrimSpace(com2)
+			com3 = strings.TrimSpace(com3)
+			com4 = strings.TrimSpace(com4)
+			com5 = strings.TrimSpace(com5)
+			com6 = strings.TrimSpace(com6)
+			com7 = strings.TrimSpace(com7)
+			cmd = exec.Command(string(com1), string(com2), string(com3), string(com4), string(com5), string(com6), string(com7))
+			var out bytes.Buffer
+			cmd.Stdout = &out
+			err := cmd.Run()
+			test := cmd.Wait()
+			if err != nil {
+				color.Red.Print(err)
+				color.Red.Print(test)
+			}
+			fmt.Printf(out.String())
+
+		case len(list) == 8:
+			fmt.Print("\n")
+			com1 = list[0]
+			com2 = list[1]
+			com3 = list[2]
+			com4 = list[3]
+			com5 = list[4]
+			com6 = list[5]
+			com7 = list[6]
+			com8 = list[7]
+			com1 = strings.TrimSpace(com1)
+			com2 = strings.TrimSpace(com2)
+			com3 = strings.TrimSpace(com3)
+			com4 = strings.TrimSpace(com4)
+			com5 = strings.TrimSpace(com5)
+			com6 = strings.TrimSpace(com6)
+			com7 = strings.TrimSpace(com7)
+			com8 = strings.TrimSpace(com8)
+			cmd = exec.Command(string(com1), string(com2), string(com3), string(com4), string(com5), string(com6), string(com7), string(com8))
+			var out bytes.Buffer
+			cmd.Stdout = &out
+			err := cmd.Run()
+			test := cmd.Wait()
+			if err != nil {
+				color.Red.Print(err)
+				color.Red.Print(test)
+			}
+			fmt.Printf(out.String())
+
+		case len(list) == 9:
+			fmt.Print("\n")
+			com1 = list[0]
+			com2 = list[1]
+			com3 = list[2]
+			com4 = list[3]
+			com5 = list[4]
+			com6 = list[5]
+			com7 = list[6]
+			com8 = list[7]
+			com9 = list[9]
+			com1 = strings.TrimSpace(com1)
+			com2 = strings.TrimSpace(com2)
+			com3 = strings.TrimSpace(com3)
+			com4 = strings.TrimSpace(com4)
+			com5 = strings.TrimSpace(com5)
+			com6 = strings.TrimSpace(com6)
+			com7 = strings.TrimSpace(com7)
+			com8 = strings.TrimSpace(com8)
+			com9 = strings.TrimSpace(com9)
+			cmd = exec.Command(string(com1), string(com2), string(com3), string(com4), string(com5), string(com6), string(com7), string(com8), string(com9))
+			var out bytes.Buffer
+			cmd.Stdout = &out
+			err := cmd.Run()
+			test := cmd.Wait()
+			if err != nil {
+				color.Red.Print(err)
+				color.Red.Print(test)
+			}
+			fmt.Printf(out.String())
+
+		case len(list) == 9:
+			fmt.Print("\n")
+			com1 = list[0]
+			com2 = list[1]
+			com3 = list[2]
+			com4 = list[3]
+			com5 = list[4]
+			com6 = list[5]
+			com7 = list[6]
+			com8 = list[7]
+			com9 = list[8]
+			com10 = list[9]
+			com1 = strings.TrimSpace(com1)
+			com2 = strings.TrimSpace(com2)
+			com3 = strings.TrimSpace(com3)
+			com4 = strings.TrimSpace(com4)
+			com5 = strings.TrimSpace(com5)
+			com6 = strings.TrimSpace(com6)
+			com7 = strings.TrimSpace(com7)
+			com8 = strings.TrimSpace(com8)
+			com9 = strings.TrimSpace(com9)
+			com10 = strings.TrimSpace(com10)
+			cmd = exec.Command(string(com1), string(com2), string(com3), string(com4), string(com5), string(com6), string(com7), string(com8), string(com9), string(com10))
+			var out bytes.Buffer
+			cmd.Stdout = &out
+			err := cmd.Run()
+			test := cmd.Wait()
+			if err != nil {
+				color.Red.Print(err)
+				color.Red.Print(test)
+			}
+			fmt.Printf(out.String())
         }
         n += 1
     }
