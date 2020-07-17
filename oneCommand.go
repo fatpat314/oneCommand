@@ -357,7 +357,7 @@ func CmdRun() {
 			}
 			fmt.Printf(out.String())
 
-		case len(list) == 9:
+		case len(list) == 10:
 			fmt.Print("\n")
 			com1 = list[0]
 			com2 = list[1]
