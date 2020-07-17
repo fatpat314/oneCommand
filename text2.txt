@@ -1,2 +1,0 @@
-cat text.txt
-cat text3.txt
