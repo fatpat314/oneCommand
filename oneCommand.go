@@ -17,7 +17,7 @@ import (
 
 // CmdCreate takes command line input from the user that is used to generate
 // a .txt file which stores the commands you with to run.
-func CmdCreate(){
+func CmdCreate()string{
     reader := bufio.NewReader(os.Stdin)
     color.Green.Print("Name new command file: ")
     fileName, _ := reader.ReadString('\n')
@@ -35,39 +35,44 @@ func CmdCreate(){
     color.Green.Print("Write Commands: ", "\n")
     fileWrite, _ := writer.ReadString('\n')
     f := strings.Replace(fileWrite, ", ", "\n", -1)
-    fmt.Printf(f, "\n")
 
     s := []byte(f)
     err := ioutil.WriteFile(fileName, s, 0777)
     if err != nil {
         color.Red.Println(err)
     }
+	return fileName
 }
 // CmdShow takes user input to find an exsisting file and prints each line
 // of commands so the user can read the list of commands.
-func CmdShow(){
+func CmdShow() string{
     reader := bufio.NewReader(os.Stdin)
     color.Green.Print("Enter command file name: ")
     fmt.Print("\n")
     comFile, _ := reader.ReadString('\n')
     comFile = strings.TrimSpace(comFile)
     comFile = comFile + ".txt"
+	if comFile == ".txt"{
+		comFile = "test.txt"
+	}
     content, err := ioutil.ReadFile(comFile)
     if err != nil {
         color.Red.Print(err)
     }
     fmt.Print("", "\n")
     color.Green.Print(comFile, " Command list: ")
-    fmt.Print("\n" + string(content), "\n")
+    fmt.Printf("\n" + string(content))
+
+	return string(content)
 }
 
 // CmdList filters through the directory to find all .txt and prints the list
 // 	out to the user.
-func CmdList(){
+func CmdList()[]string{
     dir := flag.String("dir", ".", "Find all.txt")
     file, err := os.Open(*dir)
     if err != nil{
-        color.Red.Print("failed opening directory: %s", err)
+        color.Red.Printf("failed opening directory: %s", err)
     }
     defer file.Close()
     list, _ := file.Readdirnames(0)
@@ -79,6 +84,7 @@ func CmdList(){
         i += 1
     }
     fmt.Print("\n")
+	return list
 }
 
 //CmdHelp is just used to give extra instruction that are printed to the command line
@@ -88,6 +94,7 @@ func CmdHelp(){
     color.Green.Print("\n", "ENTER: LIST", "\n", "Shows a list of all of the of the existing command files", "\n")
     color.Green.Print("\n", "ENTER: SHOW", "\n", "Shows the contents of an existing command file. The file that is shown is chosen by name", "\n")
     color.Green.Print("\n", "ENTER: END", "\n", "Exits the program", "\n", "\n")
+	return
 }
 
 // CmdRun takes user input to determine which .txt file to run and exicutes the Commands
